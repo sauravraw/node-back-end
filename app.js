@@ -1,3 +1,7 @@
+const sendResponse = require("./helpers/sendResponse.js");
+const AppError = require("./helpers/appError.js");
+const sendError = require("./helpers/sendError");
+
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -20,17 +24,12 @@ app.get("/blogs", (req, res) => {
 			});
 		});
 		if (data < 1) {
-			res.status(404).json({
-				status: "Blog not found",
-			});
+			sendError(404, "Unsuccessful", "Blog not found", req, res);
 		} else {
-			res.status(200).json({
-				status: "Successful",
-				data,
-			});
+			sendResponse(200, "Successful", data, req, res);
 		}
 	} else {
-		res.status(200).json(blogInfo);
+		sendResponse(200, "Successful", blogInfo, req, res);
 	}
 });
 
@@ -40,14 +39,9 @@ app.get("/blogs/:id", (req, res) => {
 		return blog.id === req.params.id;
 	});
 	if (blog) {
-		res.status(200).json({
-			status: "Successful",
-			data: blog,
-		});
+		sendResponse(200, "Successful", blog, req, res);
 	} else {
-		res.status(200).json({
-			status: "Blog not found",
-		});
+		sendError(404, "Unsuccessful", "Blog not found", req, res);
 	}
 });
 
