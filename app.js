@@ -13,18 +13,25 @@ const blogInfo = JSON.parse(fs.readFileSync(BLOGS, "utf-8"));
 
 // get all the blogs
 app.get("/blogs", (req, res) => {
-	let data = blogInfo.filter((blog) => {
-		return Object.keys(req.query).every((key) => {
-			return blog[key] == req.query[key];
+	if (req.query) {
+		let data = blogInfo.filter((blog) => {
+			return Object.keys(req.query).every((key) => {
+				return blog[key] == req.query[key];
+			});
 		});
-	});
-
-	res.status(200).json({
-		status: "Successful",
-		data,
-	});
-
-	res.status(200).json(blogInfo);
+		if (data < 1) {
+			res.status(404).json({
+				status: "Blog not found",
+			});
+		} else {
+			res.status(200).json({
+				status: "Successful",
+				data,
+			});
+		}
+	} else {
+		res.status(200).json(blogInfo);
+	}
 });
 
 // blogs passed with the id
@@ -32,7 +39,6 @@ app.get("/blogs/:id", (req, res) => {
 	let blog = blogInfo.find((blog) => {
 		return blog.id === req.params.id;
 	});
-
 	if (blog) {
 		res.status(200).json({
 			status: "Successful",
