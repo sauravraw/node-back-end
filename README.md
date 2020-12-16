@@ -23,3 +23,6 @@ open **Postman**
 5. to search by parameters
     select **Get** from dropdown and type: http://localhost:4000/blogs?(key-tosearch)
     eg: http://localhost:4000/blogs?author=Aryanna  Gulgowski
+    
+    technology used
+    Nodejs JavaScript
