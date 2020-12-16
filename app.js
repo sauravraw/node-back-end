@@ -20,7 +20,16 @@ app.get("/blogs", (req, res) => {
 	if (req.query) {
 		let data = blogInfo.filter((blog) => {
 			return Object.keys(req.query).every((key) => {
-				return blog[key] == req.query[key];
+				return (
+					blog[key]
+						.trim()
+						.replace(/[#_-\s]/g, "")
+						.toLowwerCase() ===
+					req.query[key]
+						.trim()
+						.replace(/[#_-\s]/g, "")
+						.toLowwerCase()
+				);
 			});
 		});
 		if (data < 1) {
