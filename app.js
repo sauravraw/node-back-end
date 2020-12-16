@@ -24,11 +24,11 @@ app.get("/blogs", (req, res) => {
 					blog[key]
 						.trim()
 						.replace(/[#_-\s]/g, "")
-						.toLowwerCase() ===
+						.toLowerCase() ===
 					req.query[key]
 						.trim()
 						.replace(/[#_-\s]/g, "")
-						.toLowwerCase()
+						.toLowerCase()
 				);
 			});
 		});
