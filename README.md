@@ -24,5 +24,6 @@ open **Postman**
     select **Get** from dropdown and type: http://localhost:4000/blogs?(key-tosearch)
     eg: http://localhost:4000/blogs?author=Aryanna  Gulgowski
     
-    technology used
-    Nodejs JavaScript
+# technology used
+    Nodejs 
+    JavaScript
